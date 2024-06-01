@@ -20,5 +20,8 @@ data class Client(
 
     @Column(nullable = false, length = 64)
     @Enumerated(value = EnumType.STRING)
-    val organizationalLegalForm: OrganizationalLegalForm
+    val organizationalLegalForm: OrganizationalLegalForm,
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    val deposits: List<Deposit>,
 )
