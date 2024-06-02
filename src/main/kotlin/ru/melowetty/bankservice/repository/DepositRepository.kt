@@ -6,5 +6,5 @@ import ru.melowetty.bankservice.entity.Deposit
 
 @Repository
 interface DepositRepository: CrudRepository<Deposit, Long> {
-    fun getDepositByOutDated(outDated: Boolean = false): List<Deposit>
+    fun getDepositByIsOutDated(isOutDated: Boolean = false): List<Deposit>
 }

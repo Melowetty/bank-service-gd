@@ -13,4 +13,5 @@ interface DepositService {
     fun createDeposit(@Valid createDepositRequest: CreateDepositRequest): Deposit
     fun deleteDeposit(id: Long)
     fun sortDepositsByField(field: String): List<Deposit>
+    fun getDepositById(id: Long): Deposit?
 }

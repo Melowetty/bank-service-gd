@@ -53,7 +53,7 @@ class DepositServiceTest {
             Deposit(id = 2, client = Mockito.mock(Client::class.java), bank = Mockito.mock(Bank::class.java), dateOfOpen = LocalDateTime.now(), percent = 6, duration = 24, isOutDated = false)
         )
 
-        Mockito.`when`(depositRepository.getDepositByOutDated(outDated = false)).thenReturn(expected)
+        Mockito.`when`(depositRepository.getDepositByIsOutDated(isOutDated = false)).thenReturn(expected)
 
         val actual = depositService.getAllNotOutDatedDeposits()
 
@@ -144,7 +144,7 @@ class DepositServiceTest {
             Deposit(id = 1, client = Mockito.mock(Client::class.java), bank = Mockito.mock(Bank::class.java), dateOfOpen = LocalDateTime.now(), percent = 5, duration = 12)
         )
 
-        Mockito.`when`(depositRepository.findAll()).thenReturn(expected)
+        Mockito.`when`(depositRepository.getDepositByIsOutDated(isOutDated = false)).thenReturn(expected)
 
         val actual = depositService.sortDepositsByField("percent")
 
@@ -158,11 +158,31 @@ class DepositServiceTest {
             Deposit(id = 1, client = Mockito.mock(Client::class.java), bank = Mockito.mock(Bank::class.java), dateOfOpen = LocalDateTime.now(), percent = 5, duration = 12)
         )
 
-        Mockito.`when`(depositRepository.findAll()).thenReturn(expected)
+        Mockito.`when`(depositRepository.getDepositByIsOutDated(isOutDated = false)).thenReturn(expected)
 
         assertThrows<RuntimeException> {
             depositService.sortDepositsByField("nonexistentField")
         }
+    }
+
+    @Test
+    fun `get client by id when it is exists`() {
+        val expected = Deposit(id = 1, client = Mockito.mock(Client::class.java), bank = Mockito.mock(Bank::class.java), dateOfOpen = LocalDateTime.now(), percent = 5, duration = 12)
+
+        Mockito.`when`(depositRepository.findById(1)).thenReturn(Optional.of(expected))
+
+        val actual = depositService.getDepositById(1)
+
+        Assertions.assertEquals(expected, actual, "Депозит который должен быть не найден")
+    }
+
+    @Test
+    fun `get bank by id when it is no exists`() {
+        Mockito.`when`(depositRepository.findById(Mockito.any())).thenReturn(Optional.empty())
+
+        val actual = depositService.getDepositById(1)
+
+        Assertions.assertNull(actual, "Депозит который не существует найден")
     }
 
     companion object {

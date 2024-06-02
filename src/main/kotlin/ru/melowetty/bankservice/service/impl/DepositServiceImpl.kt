@@ -26,11 +26,11 @@ class DepositServiceImpl(
     }
 
     override fun getAllNotOutDatedDeposits(): List<Deposit> {
-        return depositRepository.getDepositByOutDated(outDated = false)
+        return depositRepository.getDepositByIsOutDated(isOutDated = false)
     }
 
     override fun fullEditDeposit(id: Long, @Valid editDepositRequest: EditDepositRequest): Deposit? {
-        val deposit = depositRepository.findById(id).orElse(null) ?: return null
+        val deposit = getDepositById(id) ?: return null
         val client = clientService.getClientById(editDepositRequest.clientId)
             ?: throw EntityNotFoundException("Клиент с таким ID не найден!")
         val bank = bankService.getBankById(editDepositRequest.clientId)
@@ -45,7 +45,7 @@ class DepositServiceImpl(
     }
 
     override fun partEditDeposit(id: Long, fields: Map<String, Any?>): Deposit? {
-        val deposit = depositRepository.findById(id).orElse(null) ?: return null
+        val deposit = getDepositById(id) ?: return null
         ObjectUtils.changeFields(Deposit::class.java, fields = fields, target = deposit)
         return depositRepository.save(deposit)
     }
@@ -74,7 +74,11 @@ class DepositServiceImpl(
     }
 
     override fun sortDepositsByField(field: String): List<Deposit> {
-        return ObjectUtils.sortByField(Deposit::class, field = field, data = getAllDeposits())
+        return ObjectUtils.sortByField(Deposit::class, field = field, data = getAllNotOutDatedDeposits())
             ?: throw RuntimeException("Поле с таким названием не найдено!")
+    }
+
+    override fun getDepositById(id: Long): Deposit? {
+        return depositRepository.findById(id).orElse(null)
     }
 }
