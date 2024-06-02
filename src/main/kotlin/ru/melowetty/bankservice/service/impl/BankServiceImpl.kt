@@ -3,7 +3,6 @@ package ru.melowetty.bankservice.service.impl
 import jakarta.persistence.EntityNotFoundException
 import jakarta.validation.Valid
 import org.springframework.stereotype.Service
-import org.springframework.util.ReflectionUtils
 import org.springframework.validation.annotation.Validated
 import ru.melowetty.bankservice.entity.Bank
 import ru.melowetty.bankservice.model.CreateBankRequest
@@ -29,15 +28,7 @@ class BankServiceImpl(
 
     override fun patchBank(id: Long, fields: Map<String, Any?>): Bank? {
         val bank = getBankById(id) ?: return null
-        fields.forEach { (t, u) ->
-            if(t != "id") {
-                val field = ReflectionUtils.findField(Bank::class.java, t)
-                if (field != null) {
-                    field.trySetAccessible()
-                    ReflectionUtils.setField(field, bank, u)
-                }
-            }
-        }
+        ObjectUtils.changeFields(Bank::class.java, fields = fields, target = bank)
         return bankRepository.save(bank)
     }
 

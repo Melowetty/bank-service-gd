@@ -10,6 +10,6 @@ interface ClientService {
     fun patchClient(id: Long, fields: Map<String, Any?>): Client?
     fun editClient(editClientRequest: EditClientRequest): Client?
     fun createClient(createClientRequest: CreateClientRequest): Client
-    fun getAllClient(): List<Client>
-    fun getSortedClientByField(field: String): List<Client>
+    fun getAllClients(): List<Client>
+    fun getSortedClientsByField(field: String): List<Client>
 }

@@ -33,6 +33,25 @@ class ObjectUtilsTest {
         Assertions.assertNull(result, "Вернулся отсортированный список по несуществующему полю, хотя должен был вернуться null")
     }
 
+    @Test
+    fun `change object fields`() {
+        val expected = TestClass(
+            id = 1,
+            name = "Test2"
+        )
+
+        val obj = TestClass(
+            id = 1,
+            name = "Test"
+        )
+
+        val fields = mapOf("name" to "Test2")
+
+        ObjectUtils.changeFields(TestClass::class.java, fields = fields, target = obj)
+
+        Assertions.assertEquals(expected, obj, "Объект не изменился после изменений")
+    }
+
 
     data class TestClass(
         val id: Long,

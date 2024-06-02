@@ -52,7 +52,7 @@ class ClientServiceTest {
 
         val actual = clientService.getSortedClientsByField(field = "shortName")
 
-        Assertions.assertEquals(expected, actual, "Списки с отсортированными клиентами по полю shortName не равны")
+        Assertions.assertEquals(expected.sortedBy { it.shortName }, actual, "Списки с отсортированными клиентами по полю shortName не равны")
     }
 
     @Test
