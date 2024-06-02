@@ -8,6 +8,9 @@ data class Bank(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
 
+    @Column(nullable = false, length = 256)
+    val name: String,
+
     @Column(nullable = false)
     val bic: String,
 

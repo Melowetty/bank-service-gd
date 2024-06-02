@@ -19,9 +19,12 @@ data class Deposit(
     @OnDelete(action = OnDeleteAction.CASCADE)
     val bank: Bank,
 
+    @Column(nullable = false)
     val dateOfOpen: LocalDateTime,
 
+    @Column(nullable = false)
     val percent: Int,
 
+    @Column(nullable = false)
     val duration: Int,
 )
