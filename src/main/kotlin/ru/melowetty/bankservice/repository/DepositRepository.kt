@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import ru.melowetty.bankservice.entity.Deposit
 
 @Repository
-interface DepositRepository: CrudRepository<Deposit, Long>
+interface DepositRepository: CrudRepository<Deposit, Long> {
+    fun getDepositByOutDated(outDated: Boolean = false): List<Deposit>
+}
