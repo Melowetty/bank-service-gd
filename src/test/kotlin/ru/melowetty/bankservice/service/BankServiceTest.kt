@@ -54,6 +54,21 @@ class BankServiceTest {
     }
 
     @Test
+    fun `get sorted banks by not exists field`() {
+        val expected = listOf(
+            Bank(id = 2, bic = "123456789", name = "Sber", deposits = listOf()),
+            Bank(id = 1, bic = "234532546", name = "Tinkoff", deposits = listOf()),
+        )
+        Mockito.`when`(bankRepository.findAll()).thenReturn(
+            expected.stream().toList()
+        )
+
+        assertThrows<RuntimeException> {
+            bankService.getSortedBanksByField(field = "nonexistsfield")
+        }
+    }
+
+    @Test
     fun `get bank by id when it is exists`() {
         val expected = Bank(id = 1, bic = "234532546", name = "Tinkoff", deposits = listOf())
 
