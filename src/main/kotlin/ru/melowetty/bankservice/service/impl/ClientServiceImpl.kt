@@ -32,8 +32,8 @@ class ClientServiceImpl(
         return clientRepository.save(client)
     }
 
-    override fun editClient(@Valid editClientRequest: EditClientRequest): Client? {
-        val client = getClientById(editClientRequest.id) ?: return null
+    override fun editClient(id: Long, @Valid editClientRequest: EditClientRequest): Client? {
+        val client = getClientById(id) ?: return null
         val newClient = client.copy(
             name = editClientRequest.name,
             shortName = editClientRequest.shortName,

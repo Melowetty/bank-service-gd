@@ -1,13 +1,9 @@
 package ru.melowetty.bankservice.model
 
-import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Length
 
 data class EditClientRequest(
-    @Min(value = 1, message = "ID клиента должен быть больше 0")
-    val id: Long,
-
     @NotBlank(message = "Название клиента не должно быть пустым")
     @Length(min = 3, max = 256, message = "Длина названия клиента не должно быть короче 3 символов и длиннее 256")
     val name: String,

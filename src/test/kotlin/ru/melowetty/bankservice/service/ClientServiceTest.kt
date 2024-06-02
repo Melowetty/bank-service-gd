@@ -134,7 +134,6 @@ class ClientServiceTest {
     @Test
     fun `edit exists client`() {
         val request = EditClientRequest(
-            id = 1,
             name = "Tinkoff",
             shortName = "TB",
             address = "Moscow",
@@ -144,21 +143,20 @@ class ClientServiceTest {
         val after = Client(id = 1, name = "Tinkoff", shortName = "TB", address = "Moscow", organizationalLegalForm = OrganizationalLegalForm.AO)
         Mockito.`when`(clientRepository.findById(1)).thenReturn(Optional.of(before))
         Mockito.`when`(clientRepository.save(after)).thenReturn(after)
-        val actual = clientService.editClient(request)
+        val actual = clientService.editClient(1, request)
         Assertions.assertEquals(actual, after, "Клиент не изменился после запроса на изменение")
     }
 
     @Test
     fun `edit non exists client`() {
         val request = EditClientRequest(
-            id = 1,
             name = "Tinkoff",
             shortName = "TB",
             address = "Moscow",
             organizationalLegalForm = OrganizationalLegalForm.AO,
         )
         Mockito.`when`(clientRepository.findById(1)).thenReturn(Optional.empty())
-        val actual = clientService.editClient(request)
+        val actual = clientService.editClient(1, request)
         Assertions.assertNull(actual, "Клиент нашелся в запросе на изменение, хотя его не существует")
     }
 }

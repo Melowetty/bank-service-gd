@@ -32,8 +32,8 @@ class BankServiceImpl(
         return bankRepository.save(bank)
     }
 
-    override fun editBank(@Valid editBankRequest: EditBankRequest): Bank? {
-        val bank = getBankById(editBankRequest.id) ?: return null
+    override fun editBank(id: Long, @Valid editBankRequest: EditBankRequest): Bank? {
+        val bank = getBankById(id) ?: return null
         val newBank = bank.copy(
             bic = editBankRequest.bic,
             name = editBankRequest.name,

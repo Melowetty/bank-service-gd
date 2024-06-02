@@ -129,20 +129,20 @@ class BankServiceTest {
 
     @Test
     fun `edit exists bank`() {
-        val request = EditBankRequest(id = 1, "Sber", bic = "234532546")
+        val request = EditBankRequest("Sber", bic = "234532546")
         val before = Bank(id = 1, bic = "123456789", name = "Tinkoff", deposits = listOf())
         val after = Bank(id = 1, bic = "234532546", name = "Sber", deposits = listOf())
         Mockito.`when`(bankRepository.findById(1)).thenReturn(Optional.of(before))
         Mockito.`when`(bankRepository.save(after)).thenReturn(after)
-        val actual = bankService.editBank(request)
+        val actual = bankService.editBank(1, request)
         Assertions.assertEquals(actual, after, "Банк не изменился после запроса на изменение")
     }
 
     @Test
     fun `edit non exists bank`() {
-        val request = EditBankRequest(id = 1, "Sber", bic = "234532546")
+        val request = EditBankRequest("Sber", bic = "234532546")
         Mockito.`when`(bankRepository.findById(1)).thenReturn(Optional.empty())
-        val actual = bankService.editBank(request)
+        val actual = bankService.editBank(1, request)
         Assertions.assertNull(actual, "Банк нашелся в запросе на изменение, хотя его не существует")
     }
 }
