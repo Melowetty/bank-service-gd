@@ -1,0 +1,590 @@
+openapi: "3.0.3"
+info:
+  title: "bank_service API"
+  description: "bank_service API"
+  version: "1.0.0"
+servers:
+  - url: "https://bank_service"
+paths:
+  /bank/{id}:
+    put:
+      summary: "PUT bank/{id}"
+      operationId: "fullEditBank"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EditBankRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BankDto"
+    patch:
+      summary: "PATCH bank/{id}"
+      operationId: "partEditBank"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BankDto"
+    delete:
+      summary: "DELETE bank/{id}"
+      operationId: "deleteBank"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "204":
+          description: "No Content"
+    get:
+      summary: "GET bank/{id}"
+      operationId: "getBank"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BankDto"
+  /bank:
+    post:
+      summary: "POST bank"
+      operationId: "createBank"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBankRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BankDto"
+    get:
+      summary: "GET bank"
+      operationId: "getAllBanks"
+      parameters:
+        - name: "sortBy"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BankShortDto"
+  /client/{id}:
+    put:
+      summary: "PUT client/{id}"
+      operationId: "fullEditClient"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EditClientRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+    patch:
+      summary: "PATCH client/{id}"
+      operationId: "partEditClient"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+    delete:
+      summary: "DELETE client/{id}"
+      operationId: "deleteClient"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "204":
+          description: "No Content"
+    get:
+      summary: "GET client/{id}"
+      operationId: "getClient"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+  /client:
+    post:
+      summary: "POST client"
+      operationId: "createClient"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateClientRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+    get:
+      summary: "GET client"
+      operationId: "getAllClients"
+      parameters:
+        - name: "sortBy"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ClientShortDto"
+  /deposit/{id}:
+    put:
+      summary: "PUT deposit/{id}"
+      operationId: "fullEditDeposit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EditDepositRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DepositDto"
+    patch:
+      summary: "PATCH deposit/{id}"
+      operationId: "partEditDeposit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "string"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DepositDto"
+    delete:
+      summary: "DELETE deposit/{id}"
+      operationId: "deleteDeposit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "204":
+          description: "No Content"
+    get:
+      summary: "GET deposit/{id}"
+      operationId: "getDeposit"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DepositDto"
+  /deposit:
+    post:
+      summary: "POST deposit"
+      operationId: "createDeposit"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDepositRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DepositDto"
+    get:
+      summary: "GET deposit"
+      operationId: "getAllNotOutDatedDeposits"
+      parameters:
+        - name: "sortBy"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/DepositShortDto"
+  /deposit/all:
+    get:
+      summary: "GET deposit/all"
+      operationId: "getAllDeposits"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/DepositShortDto"
+components:
+  schemas:
+    EditBankRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        bic:
+          type: "string"
+      required:
+        - "name"
+        - "bic"
+    DepositInfo:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        dateOfOpen:
+          type: "string"
+          format: "date-time"
+        percent:
+          type: "integer"
+          format: "int32"
+        duration:
+          type: "integer"
+          format: "int32"
+      required:
+        - "dateOfOpen"
+    BankDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        bic:
+          type: "string"
+        deposits:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DepositInfo"
+      required:
+        - "name"
+        - "bic"
+        - "deposits"
+    CreateBankRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        bic:
+          type: "string"
+      required:
+        - "name"
+        - "bic"
+    BankShortDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        bic:
+          type: "string"
+      required:
+        - "name"
+        - "bic"
+    EditClientRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        shortName:
+          type: "string"
+        address:
+          type: "string"
+        organizationalLegalForm:
+          type: "string"
+          enum:
+            - "OOO"
+            - "ZAO"
+            - "AO"
+            - "IP"
+            - "NKO"
+      required:
+        - "name"
+        - "shortName"
+        - "address"
+        - "organizationalLegalForm"
+    ClientDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        shortName:
+          type: "string"
+        address:
+          type: "string"
+        organizationalLegalForm:
+          type: "string"
+          enum:
+            - "OOO"
+            - "ZAO"
+            - "AO"
+            - "IP"
+            - "NKO"
+        deposits:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DepositInfo"
+      required:
+        - "name"
+        - "shortName"
+        - "address"
+        - "organizationalLegalForm"
+        - "deposits"
+    CreateClientRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        shortName:
+          type: "string"
+        address:
+          type: "string"
+        organizationalLegalForm:
+          type: "string"
+          enum:
+            - "OOO"
+            - "ZAO"
+            - "AO"
+            - "IP"
+            - "NKO"
+      required:
+        - "name"
+        - "shortName"
+        - "address"
+        - "organizationalLegalForm"
+    ClientShortDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        shortName:
+          type: "string"
+        address:
+          type: "string"
+        organizationalLegalForm:
+          type: "string"
+          enum:
+            - "OOO"
+            - "ZAO"
+            - "AO"
+            - "IP"
+            - "NKO"
+      required:
+        - "name"
+        - "shortName"
+        - "address"
+        - "organizationalLegalForm"
+    EditDepositRequest:
+      type: "object"
+      properties:
+        clientId:
+          type: "integer"
+          format: "int64"
+        bankId:
+          type: "integer"
+          format: "int64"
+        percent:
+          type: "integer"
+          format: "int32"
+        duration:
+          type: "integer"
+          format: "int32"
+    DepositDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        client:
+          $ref: "#/components/schemas/ClientShortDto"
+        bank:
+          $ref: "#/components/schemas/BankShortDto"
+        dateOfOpen:
+          type: "string"
+          format: "date-time"
+        percent:
+          type: "integer"
+          format: "int32"
+        duration:
+          type: "integer"
+          format: "int32"
+      required:
+        - "client"
+        - "bank"
+        - "dateOfOpen"
+    CreateDepositRequest:
+      type: "object"
+      properties:
+        clientId:
+          type: "integer"
+          format: "int64"
+        bankId:
+          type: "integer"
+          format: "int64"
+        percent:
+          type: "integer"
+          format: "int32"
+        duration:
+          type: "integer"
+          format: "int32"
+    DepositShortDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        clientId:
+          type: "integer"
+          format: "int64"
+        bankId:
+          type: "integer"
+          format: "int64"
+        dateOfOpen:
+          type: "string"
+          format: "date-time"
+        percent:
+          type: "integer"
+          format: "int32"
+        duration:
+          type: "integer"
+          format: "int32"
+      required:
+        - "dateOfOpen"
