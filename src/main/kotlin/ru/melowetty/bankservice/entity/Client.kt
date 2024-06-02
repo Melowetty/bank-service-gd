@@ -9,7 +9,7 @@ data class Client(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 256, unique = true)
     val name: String,
 
     @Column(nullable = false, length = 64)

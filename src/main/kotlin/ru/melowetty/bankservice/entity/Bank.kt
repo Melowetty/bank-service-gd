@@ -11,7 +11,7 @@ data class Bank(
     @Column(nullable = false, length = 256)
     val name: String,
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     val bic: String,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank")
