@@ -30,6 +30,7 @@ class DepositMapper(
             dateOfOpen = deposit.dateOfOpen,
             percent = deposit.percent,
             duration = deposit.duration,
+            isOutDated = deposit.isOutDated
         )
     }
 }

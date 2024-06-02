@@ -27,4 +27,7 @@ data class Deposit(
 
     @Column(nullable = false)
     val duration: Int,
+
+    @Column(nullable = false, columnDefinition="BOOLEAN DEFAULT false")
+    val isOutDated: Boolean = false,
 )

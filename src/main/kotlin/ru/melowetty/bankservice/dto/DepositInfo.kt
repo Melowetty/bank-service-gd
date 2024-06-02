@@ -10,4 +10,6 @@ data class DepositInfo(
     val percent: Int,
 
     val duration: Int,
+
+    val isOutDated: Boolean,
 )

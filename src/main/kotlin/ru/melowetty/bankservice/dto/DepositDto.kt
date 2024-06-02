@@ -14,4 +14,6 @@ data class DepositDto(
     val percent: Int,
 
     val duration: Int,
+
+    val isOutDated: Boolean,
 )
