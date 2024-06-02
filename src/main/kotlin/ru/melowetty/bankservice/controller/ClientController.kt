@@ -37,7 +37,7 @@ class ClientController(
     }
 
     @PatchMapping("/{id}")
-    fun partEditclient(@PathVariable id: Long, fields: Map<String, Any?>): ClientDto {
+    fun partEditClient(@PathVariable id: Long, fields: Map<String, Any?>): ClientDto {
         return clientService.patchClient(id, fields)?.let { clientMapper.toDto(it) }
             ?: throw EntityNotFoundException("Банк с таким ID не найден!")
     }
