@@ -7,6 +7,7 @@ import org.springframework.util.ReflectionUtils
 import org.springframework.validation.annotation.Validated
 import ru.melowetty.bankservice.entity.Bank
 import ru.melowetty.bankservice.model.CreateBankRequest
+import ru.melowetty.bankservice.model.EditBankRequest
 import ru.melowetty.bankservice.repository.BankRepository
 import ru.melowetty.bankservice.service.BankService
 import ru.melowetty.bankservice.utils.ObjectUtils
@@ -38,6 +39,15 @@ class BankServiceImpl(
             }
         }
         return bankRepository.save(bank)
+    }
+
+    override fun editBank(@Valid editBankRequest: EditBankRequest): Bank? {
+        val bank = getBankById(editBankRequest.id) ?: return null
+        val newBank = bank.copy(
+            bic = editBankRequest.bic,
+            name = editBankRequest.name,
+        )
+        return bankRepository.save(newBank)
     }
 
     override fun createBank(@Valid createBankRequest: CreateBankRequest): Bank {

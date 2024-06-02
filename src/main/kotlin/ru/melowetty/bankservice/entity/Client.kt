@@ -23,5 +23,5 @@ data class Client(
     val organizationalLegalForm: OrganizationalLegalForm,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
-    val deposits: List<Deposit>,
+    val deposits: List<Deposit> = listOf(),
 )

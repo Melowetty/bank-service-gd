@@ -11,6 +11,7 @@ import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.melowetty.bankservice.entity.Bank
 import ru.melowetty.bankservice.model.CreateBankRequest
+import ru.melowetty.bankservice.model.EditBankRequest
 import ru.melowetty.bankservice.repository.BankRepository
 import ru.melowetty.bankservice.service.impl.BankServiceImpl
 import java.util.*
@@ -124,5 +125,24 @@ class BankServiceTest {
         Mockito.`when`(bankRepository.save(expected.copy(id = 0))).thenReturn(expected)
         val actual = bankService.createBank(createBankRequest)
         Assertions.assertEquals(expected, actual, "Банк не добавился после запроса на добавление")
+    }
+
+    @Test
+    fun `edit exists bank`() {
+        val request = EditBankRequest(id = 1, "Sber", bic = "234532546")
+        val before = Bank(id = 1, bic = "123456789", name = "Tinkoff", deposits = listOf())
+        val after = Bank(id = 1, bic = "234532546", name = "Sber", deposits = listOf())
+        Mockito.`when`(bankRepository.findById(1)).thenReturn(Optional.of(before))
+        Mockito.`when`(bankRepository.save(after)).thenReturn(after)
+        val actual = bankService.editBank(request)
+        Assertions.assertEquals(actual, after, "Банк не изменился после запроса на изменение")
+    }
+
+    @Test
+    fun `edit non exists bank`() {
+        val request = EditBankRequest(id = 1, "Sber", bic = "234532546")
+        Mockito.`when`(bankRepository.findById(1)).thenReturn(Optional.empty())
+        val actual = bankService.editBank(request)
+        Assertions.assertNull(actual, "Банк нашелся в запросе на изменение, хотя его не существует")
     }
 }

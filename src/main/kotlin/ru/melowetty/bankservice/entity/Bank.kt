@@ -15,5 +15,5 @@ data class Bank(
     val bic: String,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bank")
-    val deposits: List<Deposit>,
+    val deposits: List<Deposit> = listOf(),
 )
