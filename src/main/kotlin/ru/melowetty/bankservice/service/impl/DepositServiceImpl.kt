@@ -33,7 +33,7 @@ class DepositServiceImpl(
         val deposit = getDepositById(id) ?: return null
         val client = clientService.getClientById(editDepositRequest.clientId)
             ?: throw EntityNotFoundException("Клиент с таким ID не найден!")
-        val bank = bankService.getBankById(editDepositRequest.clientId)
+        val bank = bankService.getBankById(editDepositRequest.bankId)
             ?: throw EntityNotFoundException("Банк с таким ID не найден!")
         val newDeposit = deposit.copy(
             client = client,
@@ -53,7 +53,7 @@ class DepositServiceImpl(
     override fun createDeposit(@Valid createDepositRequest: CreateDepositRequest): Deposit {
         val client = clientService.getClientById(createDepositRequest.clientId)
             ?: throw EntityNotFoundException("Клиент с таким ID не найден!")
-        val bank = bankService.getBankById(createDepositRequest.clientId)
+        val bank = bankService.getBankById(createDepositRequest.bankId)
             ?: throw EntityNotFoundException("Банк с таким ID не найден!")
         val deposit = Deposit(
             id = 0,
